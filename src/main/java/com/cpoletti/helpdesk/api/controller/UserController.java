@@ -47,8 +47,9 @@ public class UserController {
 			if (result.hasErrors()) {
 				result.getAllErrors().forEach(error -> response.getErrors().add(error.getDefaultMessage()));
 				return ResponseEntity.badRequest().body(response);
-			}			
+			}
 			
+			user.setId(null);
 			user.setPassword(passwordEncoder.encode(user.getPassword()));
 			User userPersisted = (User) userService.createOrUpdate(user);
 			
